@@ -6,11 +6,13 @@ export default defineNuxtConfig({
   modules: [
     '@nuxthub/core',
     'shadcn-nuxt',
+    '@vueuse/motion/nuxt',
     '@nuxt/eslint',
     '@nuxtjs/tailwindcss',
     '@nuxtjs/color-mode',
     '@nuxtjs/i18n',
   ],
+
   devtools: { enabled: true },
 
   colorMode: {
@@ -40,13 +42,19 @@ export default defineNuxtConfig({
   routeRules: {
     '/': {
       prerender: true,
+      ssr: false,
     },
     '/dashboard/**': {
+      prerender: true,
       ssr: false,
     },
     '/dashboard': {
       redirect: '/dashboard/links',
     },
+  },
+
+  future: {
+    compatibilityVersion: 4,
   },
 
   compatibilityDate: '2024-07-08',
@@ -89,5 +97,17 @@ export default defineNuxtConfig({
     },
     baseUrl: '/',
     defaultLocale: 'en-US',
+  },
+
+  shadcn: {
+    /**
+     * Prefix for all the imported component
+     */
+    prefix: '',
+    /**
+     * Directory that the component lives in.
+     * @default "./components/ui"
+     */
+    componentDir: './app/components/ui',
   },
 })
